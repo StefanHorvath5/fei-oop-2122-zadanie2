@@ -1,8 +1,6 @@
 package sk.stuba.fei.uim.oop.gui;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
+import java.awt.*;
 import javax.swing.*;
 
 import sk.stuba.fei.uim.oop.player.Player;
@@ -14,9 +12,17 @@ public class Render extends JPanel {
     private Player[] players;
 
     public Render(GameBoard gameBoard, Player[] players) {
+        // this.setLayout(new GridLayout(gameBoard.getBoardSize(),
+        // gameBoard.getBoardSize()));
         this.gameBoard = gameBoard;
         this.setBackground(Color.WHITE);
         this.players = players;
+
+        // for (int row = 0; row < this.gameBoard.getBoardSize(); row++) {
+        // for (int col = 0; col < this.gameBoard.getBoardSize(); col++) {
+        // this.add(this.gameBoard.getNodeAtPos(row, col));
+        // }
+        // }
     }
 
     @Override
@@ -26,6 +32,14 @@ public class Render extends JPanel {
         for (Player player : players) {
             player.draw(g);
         }
-
     }
+
+    // @Override
+    // public Component getComponentAt(Point p) {
+    // // System.out.println(p.getX() + " " + p.getY());
+    // // return null;
+    // return this.gameBoard.getNodeAtPoint(p);
+
+    // }
+
 }

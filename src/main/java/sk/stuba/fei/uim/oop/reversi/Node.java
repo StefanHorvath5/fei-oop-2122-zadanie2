@@ -8,7 +8,11 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Node {
+import javax.swing.*;
+
+public class Node
+// extends JPanel
+{
     @Getter
     @Setter
     private Player owner;
@@ -17,24 +21,44 @@ public class Node {
     @Getter
     private final int y;
     @Getter
+    @Setter
+    private boolean playable;
+    @Getter
     private Map<Direction, Node> neighbours;
-    public static final int NODE_SIZE = 50;
+    public static final int NODE_SIZE = 40;
     public static final int NODE_OFFSET = 20;
 
     public Node(int row, int col) {
         this.owner = null;
-        this.x = col * NODE_SIZE + NODE_OFFSET;
-        this.y = row * NODE_SIZE + NODE_OFFSET;
+        this.x = col * (NODE_SIZE + 10) + NODE_OFFSET;
+        this.y = row * (NODE_SIZE + 10) + NODE_OFFSET;
         this.neighbours = new HashMap<>();
+        this.playable = false;
+        // this.setBackground(Color.GREEN);
+
     }
+
+    // @Override
+    // public Dimension getPreferredSize() {
+    // return new Dimension(NODE_SIZE, NODE_SIZE);
+    // }
 
     public void addNeighbour(Direction direction, Node node) {
         this.neighbours.put(direction, node);
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE - 10, Node.NODE_SIZE - 10);
-        g.setColor(Color.BLACK);
+        if (this.playable) {
+            g.setColor(Color.RED);
+            g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE, Node.NODE_SIZE);
+            g.setColor(Color.BLACK);
+            // System.out.println("konec playable");
+            // this.playable = false;
+        } else {
+            g.setColor(Color.GREEN);
+            g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE, Node.NODE_SIZE);
+            g.setColor(Color.BLACK);
+        }
+
     }
 }

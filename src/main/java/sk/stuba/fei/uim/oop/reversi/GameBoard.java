@@ -9,7 +9,8 @@ import java.awt.*;
 public class GameBoard {
     @Getter
     @Setter
-    private int boardSize = 12;
+    private int boardSize = 6;
+    @Getter
     private Node[][] board;
 
     public GameBoard(Player players[]) {
@@ -65,7 +66,30 @@ public class GameBoard {
                 this.board[i][j].draw(g);
             }
         }
-        g.drawRect(Node.NODE_OFFSET, Node.NODE_OFFSET, this.boardSize * Node.NODE_SIZE, this.boardSize *
-                Node.NODE_SIZE);
+        g.drawRect(Node.NODE_OFFSET, Node.NODE_OFFSET, this.boardSize * (Node.NODE_SIZE + 10), this.boardSize *
+                (Node.NODE_SIZE + 10));
+    }
+
+    public Node getNodeAtPos(int row, int col) {
+        return this.board[row][col];
+    }
+
+    public Node getNodeAtPoint(Point point) {
+        // System.out.println((point.getX() - Node.NODE_OFFSET - 5) / (Node.NODE_SIZE +
+        // 10));
+        double possibleXIndex = (point.getX() - Node.NODE_OFFSET - 5) / (Node.NODE_SIZE + 10);
+        double possibleYIndex = (point.getY() - Node.NODE_OFFSET - 5) / (Node.NODE_SIZE + 10);
+        double decimalPartX = possibleXIndex - Math.floor(possibleXIndex);
+        double decimalPartY = possibleYIndex - Math.floor(possibleYIndex);
+
+        if ((decimalPartX > Node.NODE_SIZE / (double) (Node.NODE_SIZE + 10))
+                || (decimalPartY > Node.NODE_SIZE / (double) (Node.NODE_SIZE + 10))) {
+            return null;
+        } else {
+            int xIndex = (int) Math.floor(possibleXIndex);
+            int yIndex = (int) Math.floor(possibleYIndex);
+            System.out.println("Point: [" + xIndex + ", " + yIndex + "]");
+            return this.board[yIndex][xIndex];
+        }
     }
 }

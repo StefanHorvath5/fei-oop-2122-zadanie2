@@ -17,6 +17,18 @@ public class Game {
         frame.addKeyListener(logic);
         frame.add(logic.getRender());
 
+        JPanel sideMenu = new JPanel();
+        sideMenu.setBackground(new Color(220, 220, 220));
+        JButton buttonRestart = new JButton("RESTART");
+        buttonRestart.addActionListener(logic);
+        buttonRestart.setFocusable(false);
+
+        sideMenu.setLayout(new GridLayout(2, 3));
+        sideMenu.add(logic.getLabel());
+        // sideMenu.add(new BoardSizeSlider(logic));
+        sideMenu.add(buttonRestart);
+        frame.add(sideMenu, BorderLayout.LINE_END);
+
         frame.setVisible(true);
     }
 }

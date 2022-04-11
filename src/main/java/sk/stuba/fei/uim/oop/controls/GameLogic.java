@@ -13,6 +13,8 @@ import java.awt.event.*;
 public class GameLogic extends UniversalAdapter {
 
     @Getter
+    private JLabel label;
+    @Getter
     private Render render;
     @Getter
     private GameBoard gameBoard;
@@ -22,6 +24,7 @@ public class GameLogic extends UniversalAdapter {
     private boolean gameStatus;
 
     public GameLogic() {
+        this.label = new JLabel();
         this.gameStatus = false;
         this.players = new Player[2];
         this.players[0] = new Player(this, false); // user
@@ -32,7 +35,7 @@ public class GameLogic extends UniversalAdapter {
         this.render = new Render(this.gameBoard, players);
         this.render.addMouseListener(this);
         this.render.addMouseMotionListener(this);
-        this.startGame();
+        this.newGame();
     }
 
     // private void startGame() {
@@ -63,15 +66,24 @@ public class GameLogic extends UniversalAdapter {
     // }
 
     // }
-    private void startGame() {
+    private void newGame() {
         this.gameStatus = true;
         turn(false);
+        this.label.setText("Player: white(You)");
         this.render.repaint();
+    }
+
+    private void restartGame() {
+        this.players[0].clear();
+        this.players[1].clear();
+        this.gameBoard.initializeGameBoard(players);
+        newGame();
     }
 
     private void turn(boolean notPlayable) {
         boolean playable = false;
         if (this.currentPlayer.isAI()) {
+
             playable = this.currentPlayer.makeBestMove(this.gameBoard);
             if (playable) {
                 nextTurn(false);
@@ -94,15 +106,17 @@ public class GameLogic extends UniversalAdapter {
     private void nextTurn(boolean notPlayable) {
         this.currentPlayer.clearPlayableNodes();
         this.currentPlayer = this.currentPlayer.isAI() ? this.players[0] : this.players[1];
+        this.label.setText("Player: " + (this.currentPlayer.isAI() ? "black(AI)" : "white(You)"));
         this.render.repaint();
         this.turn(notPlayable);
     }
 
     private void printWinner() {
         if (players[0].getNodesCount() > players[1].getNodesCount()) {
-            System.out.println("Winner: white(you)");
+            this.label.setText("Winner: white(you)");
+
         } else {
-            System.out.println("Winner: black(computer)");
+            this.label.setText("Winner: black(computer)");
         }
     }
 
@@ -131,6 +145,20 @@ public class GameLogic extends UniversalAdapter {
             this.render.repaint();
         }
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_R:
+                this.restartGame();
+                break;
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.restartGame();
     }
 
 }

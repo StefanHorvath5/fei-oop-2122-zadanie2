@@ -29,6 +29,11 @@ public class Player {
         this.aI = aI;
     }
 
+    public void clear() {
+        this.nodes.clear();
+        this.playableNodes.clear();
+    }
+
     public void draw(Graphics g) {
         for (Node node : this.nodes) {
             g.setColor(this.aI == true ? Color.BLACK : Color.WHITE);

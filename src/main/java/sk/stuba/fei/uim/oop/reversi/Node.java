@@ -11,22 +11,16 @@ import java.util.Map;
 import javax.swing.*;
 
 public class Node extends JPanel {
-    @Getter
-    @Setter
     private Stone stone;
     @Getter
     @Setter
     private Player owner;
-    @Getter
     @Setter
     private boolean playableHover;
-    @Getter
     @Setter
     private boolean playable;
     @Getter
     private Map<Direction, Node> neighbours;
-    public static final int NODE_SIZE = 40;
-    public static final int NODE_OFFSET = 20;
 
     public Node() {
         this.owner = null;

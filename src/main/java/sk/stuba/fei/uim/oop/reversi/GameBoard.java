@@ -8,7 +8,6 @@ public class GameBoard {
     @Getter
     @Setter
     private int boardSize;
-    @Getter
     private Node[][] board;
 
     public GameBoard(Player players[]) {

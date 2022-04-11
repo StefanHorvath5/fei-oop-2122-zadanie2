@@ -11,9 +11,7 @@ import sk.stuba.fei.uim.oop.reversi.Node;
 public class Player {
     @Getter
     private boolean aI;
-    @Getter
     private List<Node> nodes;
-    @Getter
     private List<Node> playableNodes;
 
     public Player(boolean aI) {
@@ -44,17 +42,6 @@ public class Player {
         return this.nodes.size();
     }
 
-    public boolean canPlayNode(Node node) {
-        return this.checkPlayability(Direction.UP, node) != 0 ||
-                this.checkPlayability(Direction.DOWN, node) != 0 ||
-                this.checkPlayability(Direction.LEFT, node) != 0 ||
-                this.checkPlayability(Direction.RIGHT, node) != 0 ||
-                this.checkPlayability(Direction.DOWNLEFT, node) != 0 ||
-                this.checkPlayability(Direction.DOWNRIGHT, node) != 0 ||
-                this.checkPlayability(Direction.UPRIGHT, node) != 0 ||
-                this.checkPlayability(Direction.UPLEFT, node) != 0;
-    }
-
     public int updateAndGetPlayableNodesCount(GameBoard gameBoard) {
         this.playableNodes.clear();
         this.playableNodes.addAll(this.getPlayable(gameBoard));
@@ -73,34 +60,6 @@ public class Player {
             }
         }
         return playable;
-    }
-
-    public boolean makeBestMove(GameBoard gameBoard) {
-        Node bestNode = null;
-        int bestNodeOvertakeCount = 0;
-        for (Node node : this.getPlayable(gameBoard)) {
-            int currentNodeOvertakeCount = this.nodeOvertakeCount(node);
-            if (currentNodeOvertakeCount > bestNodeOvertakeCount) {
-                bestNodeOvertakeCount = currentNodeOvertakeCount;
-                bestNode = node;
-            }
-        }
-        if (bestNode != null) {
-            this.playNode(bestNode);
-            return true;
-        }
-        return false;
-    }
-
-    private int nodeOvertakeCount(Node node) {
-        return this.checkPlayability(Direction.UP, node) +
-                this.checkPlayability(Direction.DOWN, node) +
-                this.checkPlayability(Direction.LEFT, node) +
-                this.checkPlayability(Direction.RIGHT, node) +
-                this.checkPlayability(Direction.DOWNLEFT, node) +
-                this.checkPlayability(Direction.DOWNRIGHT, node) +
-                this.checkPlayability(Direction.UPRIGHT, node) +
-                this.checkPlayability(Direction.UPLEFT, node);
     }
 
     private int checkPlayability(Direction dir, Node node) {
@@ -131,6 +90,17 @@ public class Player {
         return overtakeCount;
     }
 
+    public boolean canPlayNode(Node node) {
+        return this.checkPlayability(Direction.UP, node) != 0 ||
+                this.checkPlayability(Direction.DOWN, node) != 0 ||
+                this.checkPlayability(Direction.LEFT, node) != 0 ||
+                this.checkPlayability(Direction.RIGHT, node) != 0 ||
+                this.checkPlayability(Direction.DOWNLEFT, node) != 0 ||
+                this.checkPlayability(Direction.DOWNRIGHT, node) != 0 ||
+                this.checkPlayability(Direction.UPRIGHT, node) != 0 ||
+                this.checkPlayability(Direction.UPLEFT, node) != 0;
+    }
+
     public void playNode(Node node) {
         this.overtakeNodesIfPossible(Direction.UP, node);
         this.overtakeNodesIfPossible(Direction.DOWN, node);
@@ -156,5 +126,33 @@ public class Player {
                 }
             }
         }
+    }
+
+    public boolean makeBestMove(GameBoard gameBoard) {
+        Node bestNode = null;
+        int bestNodeOvertakeCount = 0;
+        for (Node node : this.getPlayable(gameBoard)) {
+            int currentNodeOvertakeCount = this.nodeOvertakeCount(node);
+            if (currentNodeOvertakeCount > bestNodeOvertakeCount) {
+                bestNodeOvertakeCount = currentNodeOvertakeCount;
+                bestNode = node;
+            }
+        }
+        if (bestNode != null) {
+            this.playNode(bestNode);
+            return true;
+        }
+        return false;
+    }
+
+    private int nodeOvertakeCount(Node node) {
+        return this.checkPlayability(Direction.UP, node) +
+                this.checkPlayability(Direction.DOWN, node) +
+                this.checkPlayability(Direction.LEFT, node) +
+                this.checkPlayability(Direction.RIGHT, node) +
+                this.checkPlayability(Direction.DOWNLEFT, node) +
+                this.checkPlayability(Direction.DOWNRIGHT, node) +
+                this.checkPlayability(Direction.UPRIGHT, node) +
+                this.checkPlayability(Direction.UPLEFT, node);
     }
 }

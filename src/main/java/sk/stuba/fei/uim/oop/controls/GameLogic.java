@@ -7,6 +7,8 @@ import sk.stuba.fei.uim.oop.reversi.GameBoard;
 import sk.stuba.fei.uim.oop.reversi.Node;
 
 import javax.swing.*;
+
+import java.awt.Font;
 import java.awt.event.*;
 
 public class GameLogic extends UniversalAdapter {
@@ -17,16 +19,16 @@ public class GameLogic extends UniversalAdapter {
     private JLabel boardSizeLabel;
     @Getter
     private Render render;
-    @Getter
     private GameBoard gameBoard;
-    @Getter
     private Player[] players;
     private Player currentPlayer;
     private boolean gameStatus;
 
     public GameLogic() {
         this.label = new JLabel();
+        this.label.setFont(new Font("Serif", Font.PLAIN, 16));
         this.boardSizeLabel = new JLabel();
+        this.boardSizeLabel.setFont(new Font("Serif", Font.PLAIN, 16));
         this.gameStatus = false;
         this.players = new Player[2];
         this.players[0] = new Player(false); // user

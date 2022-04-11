@@ -22,7 +22,7 @@ public class Node
     private final int y;
     @Getter
     @Setter
-    private boolean playable;
+    private boolean playableHover;
     @Getter
     private Map<Direction, Node> neighbours;
     public static final int NODE_SIZE = 40;
@@ -33,7 +33,7 @@ public class Node
         this.x = col * (NODE_SIZE + 10) + NODE_OFFSET;
         this.y = row * (NODE_SIZE + 10) + NODE_OFFSET;
         this.neighbours = new HashMap<>();
-        this.playable = false;
+        this.playableHover = false;
         // this.setBackground(Color.GREEN);
 
     }
@@ -48,16 +48,17 @@ public class Node
     }
 
     public void draw(Graphics g) {
-        if (this.playable) {
-            g.setColor(Color.RED);
-            g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE, Node.NODE_SIZE);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE, Node.NODE_SIZE);
+        g.setColor(Color.BLACK);
+        if (this.playableHover) {
+            g.setColor(new Color(50, 50, 50, 150));
+            g.fillOval(this.x + 6, this.y + 6, Node.NODE_SIZE - 2, Node.NODE_SIZE - 2);
             g.setColor(Color.BLACK);
+            this.playableHover = false;
             // System.out.println("konec playable");
             // this.playable = false;
-        } else {
-            g.setColor(Color.GREEN);
-            g.fillRect(this.x + 5, this.y + 5, Node.NODE_SIZE, Node.NODE_SIZE);
-            g.setColor(Color.BLACK);
         }
 
     }

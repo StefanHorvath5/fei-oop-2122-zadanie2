@@ -88,8 +88,12 @@ public class GameBoard {
         } else {
             int xIndex = (int) Math.floor(possibleXIndex);
             int yIndex = (int) Math.floor(possibleYIndex);
-            System.out.println("Point: [" + xIndex + ", " + yIndex + "]");
-            return this.board[yIndex][xIndex];
+            if (xIndex >= 0 && yIndex >= 0 && xIndex < this.boardSize && yIndex < this.boardSize) {
+                return this.board[yIndex][xIndex];
+            }
+
+            // System.out.println("Point: [" + xIndex + ", " + yIndex + "]");
+            return null;
         }
     }
 }

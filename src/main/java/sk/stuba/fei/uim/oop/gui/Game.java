@@ -9,7 +9,7 @@ public class Game {
     public Game() {
         JFrame frame = new JFrame("Reversi!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1020, 800);
+        frame.setSize(1200, 800);
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout());
@@ -22,11 +22,15 @@ public class Game {
         JButton buttonRestart = new JButton("RESTART");
         buttonRestart.addActionListener(logic);
         buttonRestart.setFocusable(false);
-
-        sideMenu.setLayout(new GridLayout(2, 3));
+        sideMenu.setLayout(new GridLayout(2, 2));
         sideMenu.add(logic.getLabel());
-        // sideMenu.add(new BoardSizeSlider(logic));
+        sideMenu.add(logic.getBoardSizeLabel());
         sideMenu.add(buttonRestart);
+        BoardSizeSlider s = new BoardSizeSlider(JSlider.HORIZONTAL, 6, 12, 6, logic);
+        s.setMajorTickSpacing(2);
+        s.setPaintLabels(true);
+        s.setSnapToTicks(true);
+        sideMenu.add(s);
         frame.add(sideMenu, BorderLayout.LINE_END);
 
         frame.setVisible(true);

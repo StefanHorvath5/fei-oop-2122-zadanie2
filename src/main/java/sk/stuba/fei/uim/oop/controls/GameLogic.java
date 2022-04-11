@@ -15,6 +15,8 @@ public class GameLogic extends UniversalAdapter {
     @Getter
     private JLabel label;
     @Getter
+    private JLabel boardSizeLabel;
+    @Getter
     private Render render;
     @Getter
     private GameBoard gameBoard;
@@ -25,6 +27,7 @@ public class GameLogic extends UniversalAdapter {
 
     public GameLogic() {
         this.label = new JLabel();
+        this.boardSizeLabel = new JLabel();
         this.gameStatus = false;
         this.players = new Player[2];
         this.players[0] = new Player(this, false); // user
@@ -68,9 +71,12 @@ public class GameLogic extends UniversalAdapter {
     // }
     private void newGame() {
         this.gameStatus = true;
-        turn(false);
+        this.currentPlayer = this.players[0];
         this.label.setText("Player: white(You)");
+        this.boardSizeLabel
+                .setText("Board size: " + this.gameBoard.getBoardSize() + "x" + this.gameBoard.getBoardSize());
         this.render.repaint();
+        turn(false);
     }
 
     private void restartGame() {
@@ -78,6 +84,11 @@ public class GameLogic extends UniversalAdapter {
         this.players[1].clear();
         this.gameBoard.initializeGameBoard(players);
         newGame();
+    }
+
+    public void changeBoardSize(int value) {
+        this.gameBoard.setBoardSize(value);
+        this.restartGame();
     }
 
     private void turn(boolean notPlayable) {

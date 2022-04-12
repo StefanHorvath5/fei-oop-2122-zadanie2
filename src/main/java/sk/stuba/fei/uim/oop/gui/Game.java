@@ -9,7 +9,7 @@ public class Game {
     public Game() {
         JFrame frame = new JFrame("Reversi!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 800);
+        frame.setSize(700, 780);
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout(0, 5));
@@ -31,6 +31,8 @@ public class Game {
         s.setPaintLabels(true);
         s.setSnapToTicks(true);
         sideMenu.add(s);
+
+        sideMenu.setPreferredSize(new Dimension(40, 80));
         frame.add(sideMenu, BorderLayout.PAGE_END);
 
         frame.setVisible(true);

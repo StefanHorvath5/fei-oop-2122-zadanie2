@@ -25,10 +25,10 @@ public class GameLogic extends UniversalAdapter {
     private boolean gameStatus;
 
     public GameLogic() {
-        this.label = new JLabel();
-        this.label.setFont(new Font("Serif", Font.PLAIN, 16));
-        this.boardSizeLabel = new JLabel();
-        this.boardSizeLabel.setFont(new Font("Serif", Font.PLAIN, 16));
+        this.label = new JLabel("", SwingConstants.CENTER);
+        this.label.setFont(new Font("Serif", Font.PLAIN, 14));
+        this.boardSizeLabel = new JLabel("", SwingConstants.CENTER);
+        this.boardSizeLabel.setFont(new Font("Serif", Font.PLAIN, 14));
         this.gameStatus = false;
         this.players = new Player[2];
         this.players[0] = new Player(false); // user
@@ -98,11 +98,18 @@ public class GameLogic extends UniversalAdapter {
     }
 
     private void printWinner() {
-        if (players[0].getNodesCount() > players[1].getNodesCount()) {
-            this.label.setText("Winner: white(you)");
+        int youNodesCount = players[0].getNodesCount();
+        int aiNodesCount = players[1].getNodesCount();
+        if (youNodesCount > aiNodesCount) {
+            this.label
+                    .setText("<html>Winner: white(you)<br />White stones: " + youNodesCount + "<br>Black stones: "
+                            + aiNodesCount + "</html>");
 
         } else {
-            this.label.setText("Winner: black(computer)");
+            this.label.setText(
+                    "<html>Winner: black(computer)<br />White stones: " + youNodesCount + "<br>Black stones: "
+                            + aiNodesCount
+                            + "</html>");
         }
     }
 

@@ -12,8 +12,8 @@ public class BoardSizeSlider extends JSlider implements ChangeListener {
     public BoardSizeSlider(int orientation, int min, int max, int value, GameLogic logic) {
         super(orientation, min, max, value);
         this.logic = logic;
-        this.addChangeListener(this);
         this.setFocusable(false);
+        this.addChangeListener(this);
     }
 
     @Override

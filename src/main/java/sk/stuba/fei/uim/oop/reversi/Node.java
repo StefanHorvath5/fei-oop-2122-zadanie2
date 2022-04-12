@@ -38,14 +38,14 @@ public class Node extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.playableHover) {
-            this.stone.draw(g, new Color(50, 50, 50, 150), this.getWidth(), this.getHeight());
+            this.stone.draw(g, new Color(255, 255, 255, 240), this.getWidth(), this.getHeight());
             this.playableHover = false;
         }
         if (this.owner != null) {
             this.stone.draw(g, this.owner.isAI() ? Color.BLACK : Color.WHITE, this.getWidth(), this.getHeight());
         }
         if (this.playable) {
-            this.stone.draw(g, new Color(50, 50, 50, 40), this.getWidth(), this.getHeight());
+            this.stone.draw(g, new Color(0, 0, 0, 35), this.getWidth(), this.getHeight());
         }
     }
 }

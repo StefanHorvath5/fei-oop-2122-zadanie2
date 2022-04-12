@@ -38,7 +38,7 @@ public class Node extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.playableHover) {
-            this.stone.draw(g, new Color(255, 255, 255, 240), this.getWidth(), this.getHeight());
+            this.stone.draw(g, Color.LIGHT_GRAY, this.getWidth(), this.getHeight());
             this.playableHover = false;
         }
         if (this.owner != null) {

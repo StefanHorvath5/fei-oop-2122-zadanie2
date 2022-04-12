@@ -13,27 +13,27 @@ public class Game {
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout(0, 5));
-        GameLogic logic = new GameLogic();
-        frame.addKeyListener(logic);
-        frame.add(logic.getRender());
+        GameLogic gameLogic = new GameLogic();
+        frame.addKeyListener(gameLogic);
+        frame.add(gameLogic.getRender());
 
-        JPanel sideMenu = new JPanel();
-        sideMenu.setBackground(new Color(220, 220, 220));
+        JPanel bottomMenu = new JPanel();
+        bottomMenu.setBackground(new Color(220, 220, 220));
         JButton buttonRestart = new JButton("RESTART");
-        buttonRestart.addActionListener(logic);
+        buttonRestart.addActionListener(gameLogic);
         buttonRestart.setFocusable(false);
-        sideMenu.setLayout(new GridLayout(1, 4));
-        sideMenu.add(logic.getLabel());
-        sideMenu.add(logic.getBoardSizeLabel());
-        sideMenu.add(buttonRestart);
-        BoardSizeSlider s = new BoardSizeSlider(JSlider.HORIZONTAL, 6, 12, 6, logic);
+        bottomMenu.setLayout(new GridLayout(1, 4));
+        bottomMenu.add(gameLogic.getLabel());
+        bottomMenu.add(gameLogic.getBoardSizeLabel());
+        bottomMenu.add(buttonRestart);
+        BoardSizeSlider s = new BoardSizeSlider(JSlider.HORIZONTAL, 6, 12, 6, gameLogic);
         s.setMajorTickSpacing(2);
         s.setPaintLabels(true);
         s.setSnapToTicks(true);
-        sideMenu.add(s);
+        bottomMenu.add(s);
 
-        sideMenu.setPreferredSize(new Dimension(40, 80));
-        frame.add(sideMenu, BorderLayout.PAGE_END);
+        bottomMenu.setPreferredSize(new Dimension(40, 80));
+        frame.add(bottomMenu, BorderLayout.PAGE_END);
 
         frame.setVisible(true);
     }

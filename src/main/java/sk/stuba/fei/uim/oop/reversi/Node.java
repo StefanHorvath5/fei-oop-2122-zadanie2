@@ -25,6 +25,7 @@ public class Node extends JPanel {
     public Node() {
         this.owner = null;
         this.neighbours = new HashMap<>();
+        this.playable = false;
         this.playableHover = false;
         this.setBackground(Color.GREEN);
         this.stone = new Stone();

@@ -12,21 +12,14 @@ public class Player {
     @Getter
     private boolean aI;
     private List<Node> nodes;
-    private List<Node> playableNodes;
 
     public Player(boolean aI) {
         this.nodes = new ArrayList<>();
-        this.playableNodes = new ArrayList<>();
         this.aI = aI;
     }
 
     public void clear() {
         this.nodes.clear();
-        this.playableNodes.clear();
-    }
-
-    public void clearPlayableNodes() {
-        this.playableNodes.clear();
     }
 
     public void addNode(Node node) {
@@ -42,11 +35,8 @@ public class Player {
         return this.nodes.size();
     }
 
-    public int updateAndGetPlayableNodesCount(GameBoard gameBoard) {
-        this.playableNodes.clear();
-        this.playableNodes.addAll(this.getPlayable(gameBoard));
-        return this.playableNodes.size();
-
+    public int getPlayableNodesCount(GameBoard gameBoard) {
+        return this.getPlayable(gameBoard).size();
     }
 
     private List<Node> getPlayable(GameBoard gameBoard) {
@@ -62,7 +52,7 @@ public class Player {
         return playable;
     }
 
-    private int checkPlayability(Direction dir, Node node) {
+    private int getPlayabilityCount(Direction dir, Node node) {
         if (node.getOwner() != null) {
             return 0;
         }
@@ -91,14 +81,14 @@ public class Player {
     }
 
     public boolean canPlayNode(Node node) {
-        return this.checkPlayability(Direction.UP, node) != 0 ||
-                this.checkPlayability(Direction.DOWN, node) != 0 ||
-                this.checkPlayability(Direction.LEFT, node) != 0 ||
-                this.checkPlayability(Direction.RIGHT, node) != 0 ||
-                this.checkPlayability(Direction.DOWNLEFT, node) != 0 ||
-                this.checkPlayability(Direction.DOWNRIGHT, node) != 0 ||
-                this.checkPlayability(Direction.UPRIGHT, node) != 0 ||
-                this.checkPlayability(Direction.UPLEFT, node) != 0;
+        return this.getPlayabilityCount(Direction.UP, node) != 0 ||
+                this.getPlayabilityCount(Direction.DOWN, node) != 0 ||
+                this.getPlayabilityCount(Direction.LEFT, node) != 0 ||
+                this.getPlayabilityCount(Direction.RIGHT, node) != 0 ||
+                this.getPlayabilityCount(Direction.DOWNLEFT, node) != 0 ||
+                this.getPlayabilityCount(Direction.DOWNRIGHT, node) != 0 ||
+                this.getPlayabilityCount(Direction.UPRIGHT, node) != 0 ||
+                this.getPlayabilityCount(Direction.UPLEFT, node) != 0;
     }
 
     public void playNode(Node node) {
@@ -115,7 +105,7 @@ public class Player {
     }
 
     private void overtakeNodesIfPossible(Direction dir, Node node) {
-        if (this.checkPlayability(dir, node) != 0) {
+        if (this.getPlayabilityCount(dir, node) != 0) {
             Node dirNode = node.getNeighbours().get(dir);
             if (dirNode != null) {
                 while (dirNode.getOwner() != this) {
@@ -146,13 +136,13 @@ public class Player {
     }
 
     private int nodeOvertakeCount(Node node) {
-        return this.checkPlayability(Direction.UP, node) +
-                this.checkPlayability(Direction.DOWN, node) +
-                this.checkPlayability(Direction.LEFT, node) +
-                this.checkPlayability(Direction.RIGHT, node) +
-                this.checkPlayability(Direction.DOWNLEFT, node) +
-                this.checkPlayability(Direction.DOWNRIGHT, node) +
-                this.checkPlayability(Direction.UPRIGHT, node) +
-                this.checkPlayability(Direction.UPLEFT, node);
+        return this.getPlayabilityCount(Direction.UP, node) +
+                this.getPlayabilityCount(Direction.DOWN, node) +
+                this.getPlayabilityCount(Direction.LEFT, node) +
+                this.getPlayabilityCount(Direction.RIGHT, node) +
+                this.getPlayabilityCount(Direction.DOWNLEFT, node) +
+                this.getPlayabilityCount(Direction.DOWNRIGHT, node) +
+                this.getPlayabilityCount(Direction.UPRIGHT, node) +
+                this.getPlayabilityCount(Direction.UPLEFT, node);
     }
 }

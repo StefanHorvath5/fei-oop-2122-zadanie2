@@ -74,7 +74,7 @@ public class GameLogic extends UniversalAdapter {
                 nextTurn(false);
             }
         } else {
-            playable = this.currentPlayer.updateAndGetPlayableNodesCount(this.gameBoard) != 0;
+            playable = this.currentPlayer.getPlayableNodesCount(this.gameBoard) != 0;
             this.render.repaint();
 
         }
@@ -89,7 +89,6 @@ public class GameLogic extends UniversalAdapter {
     }
 
     private void nextTurn(boolean notPlayable) {
-        this.currentPlayer.clearPlayableNodes();
         this.gameBoard.clearPlayable();
         this.currentPlayer = this.currentPlayer.isAI() ? this.players[0] : this.players[1];
         this.label.setText("Player: " + (this.currentPlayer.isAI() ? "black(AI)" : "white(You)"));

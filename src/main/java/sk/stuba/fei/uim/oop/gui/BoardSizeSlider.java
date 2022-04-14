@@ -7,7 +7,7 @@ import javax.swing.event.ChangeListener;
 import sk.stuba.fei.uim.oop.controls.GameLogic;
 
 public class BoardSizeSlider extends JSlider implements ChangeListener {
-    private GameLogic logic;
+    private final GameLogic logic;
 
     public BoardSizeSlider(int orientation, int min, int max, int value, GameLogic logic) {
         super(orientation, min, max, value);

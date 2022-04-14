@@ -10,12 +10,12 @@ public class GameBoard {
     private int boardSize;
     private Node[][] board;
 
-    public GameBoard(Player players[]) {
+    public GameBoard(Player[] players) {
         this.boardSize = 6;
         this.initializeGameBoard(players);
     }
 
-    public void initializeGameBoard(Player players[]) {
+    public void initializeGameBoard(Player[] players) {
         this.board = new Node[this.boardSize][this.boardSize];
         for (int row = 0; row < this.boardSize; row++) {
             for (int col = 0; col < this.boardSize; col++) {
@@ -28,19 +28,19 @@ public class GameBoard {
                 if (row != 0) {
                     this.board[row][col].addNeighbour(Direction.UP, this.board[row - 1][col]);
                     if (col != 0) {
-                        this.board[row][col].addNeighbour(Direction.UPLEFT, this.board[row - 1][col - 1]);
+                        this.board[row][col].addNeighbour(Direction.UP_LEFT, this.board[row - 1][col - 1]);
                     }
                     if (col != this.boardSize - 1) {
-                        this.board[row][col].addNeighbour(Direction.UPRIGHT, this.board[row - 1][col + 1]);
+                        this.board[row][col].addNeighbour(Direction.UP_RIGHT, this.board[row - 1][col + 1]);
                     }
                 }
                 if (row != this.boardSize - 1) {
                     this.board[row][col].addNeighbour(Direction.DOWN, this.board[row + 1][col]);
                     if (col != 0) {
-                        this.board[row][col].addNeighbour(Direction.DOWNLEFT, this.board[row + 1][col - 1]);
+                        this.board[row][col].addNeighbour(Direction.DOWN_LEFT, this.board[row + 1][col - 1]);
                     }
                     if (col != this.boardSize - 1) {
-                        this.board[row][col].addNeighbour(Direction.DOWNRIGHT, this.board[row + 1][col + 1]);
+                        this.board[row][col].addNeighbour(Direction.DOWN_RIGHT, this.board[row + 1][col + 1]);
                     }
                 }
                 if (col != 0) {

@@ -11,7 +11,7 @@ import java.util.Map;
 import javax.swing.*;
 
 public class Node extends JPanel {
-    private Stone stone;
+    private final Stone stone;
     @Getter
     @Setter
     private Player owner;
@@ -20,7 +20,7 @@ public class Node extends JPanel {
     @Setter
     private boolean playable;
     @Getter
-    private Map<Direction, Node> neighbours;
+    private final Map<Direction, Node> neighbours;
 
     public Node() {
         this.owner = null;

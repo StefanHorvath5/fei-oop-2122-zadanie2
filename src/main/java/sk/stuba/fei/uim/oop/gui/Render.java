@@ -7,7 +7,7 @@ import sk.stuba.fei.uim.oop.reversi.GameBoard;
 
 public class Render extends JPanel {
 
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
 
     public Render(GameBoard gameBoard) {
         this.gameBoard = gameBoard;

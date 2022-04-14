@@ -14,13 +14,13 @@ import java.awt.event.*;
 public class GameLogic extends UniversalAdapter {
 
     @Getter
-    private JLabel label;
+    private final JLabel label;
     @Getter
-    private JLabel boardSizeLabel;
+    private final JLabel boardSizeLabel;
     @Getter
-    private Render render;
-    private GameBoard gameBoard;
-    private Player[] players;
+    private final Render render;
+    private final GameBoard gameBoard;
+    private final Player[] players;
     private Player currentPlayer;
     private boolean gameStatus;
 

@@ -10,8 +10,8 @@ import sk.stuba.fei.uim.oop.reversi.Node;
 
 public class Player {
     @Getter
-    private boolean aI;
-    private List<Node> nodes;
+    private final boolean aI;
+    private final List<Node> nodes;
 
     public Player(boolean aI) {
         this.nodes = new ArrayList<>();
@@ -85,10 +85,10 @@ public class Player {
                 this.getPlayabilityCount(Direction.DOWN, node) != 0 ||
                 this.getPlayabilityCount(Direction.LEFT, node) != 0 ||
                 this.getPlayabilityCount(Direction.RIGHT, node) != 0 ||
-                this.getPlayabilityCount(Direction.DOWNLEFT, node) != 0 ||
-                this.getPlayabilityCount(Direction.DOWNRIGHT, node) != 0 ||
-                this.getPlayabilityCount(Direction.UPRIGHT, node) != 0 ||
-                this.getPlayabilityCount(Direction.UPLEFT, node) != 0;
+                this.getPlayabilityCount(Direction.DOWN_LEFT, node) != 0 ||
+                this.getPlayabilityCount(Direction.DOWN_RIGHT, node) != 0 ||
+                this.getPlayabilityCount(Direction.UP_RIGHT, node) != 0 ||
+                this.getPlayabilityCount(Direction.UP_LEFT, node) != 0;
     }
 
     public void playNode(Node node) {
@@ -96,10 +96,10 @@ public class Player {
         this.overtakeNodesIfPossible(Direction.DOWN, node);
         this.overtakeNodesIfPossible(Direction.LEFT, node);
         this.overtakeNodesIfPossible(Direction.RIGHT, node);
-        this.overtakeNodesIfPossible(Direction.DOWNLEFT, node);
-        this.overtakeNodesIfPossible(Direction.DOWNRIGHT, node);
-        this.overtakeNodesIfPossible(Direction.UPRIGHT, node);
-        this.overtakeNodesIfPossible(Direction.UPLEFT, node);
+        this.overtakeNodesIfPossible(Direction.DOWN_LEFT, node);
+        this.overtakeNodesIfPossible(Direction.DOWN_RIGHT, node);
+        this.overtakeNodesIfPossible(Direction.UP_RIGHT, node);
+        this.overtakeNodesIfPossible(Direction.UP_LEFT, node);
         node.setOwner(this);
         this.addNode(node);
     }
@@ -140,9 +140,9 @@ public class Player {
                 this.getPlayabilityCount(Direction.DOWN, node) +
                 this.getPlayabilityCount(Direction.LEFT, node) +
                 this.getPlayabilityCount(Direction.RIGHT, node) +
-                this.getPlayabilityCount(Direction.DOWNLEFT, node) +
-                this.getPlayabilityCount(Direction.DOWNRIGHT, node) +
-                this.getPlayabilityCount(Direction.UPRIGHT, node) +
-                this.getPlayabilityCount(Direction.UPLEFT, node);
+                this.getPlayabilityCount(Direction.DOWN_LEFT, node) +
+                this.getPlayabilityCount(Direction.DOWN_RIGHT, node) +
+                this.getPlayabilityCount(Direction.UP_RIGHT, node) +
+                this.getPlayabilityCount(Direction.UP_LEFT, node);
     }
 }

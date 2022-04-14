@@ -13,7 +13,7 @@ public class Game {
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout(0, 5));
-        GameLogic gameLogic = new GameLogic();
+        GameLogic gameLogic = new GameLogic(frame);
         frame.addKeyListener(gameLogic);
         frame.add(gameLogic.getRender());
 

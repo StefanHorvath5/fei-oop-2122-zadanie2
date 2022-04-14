@@ -13,6 +13,7 @@ import java.awt.event.*;
 
 public class GameLogic extends UniversalAdapter {
 
+    private final JFrame frame;
     @Getter
     private final JLabel label;
     @Getter
@@ -24,7 +25,8 @@ public class GameLogic extends UniversalAdapter {
     private Player currentPlayer;
     private boolean gameStatus;
 
-    public GameLogic() {
+    public GameLogic(JFrame frame) {
+        this.frame = frame;
         this.label = new JLabel("", SwingConstants.CENTER);
         this.label.setFont(new Font("Serif", Font.PLAIN, 14));
         this.boardSizeLabel = new JLabel("", SwingConstants.CENTER);
@@ -110,7 +112,7 @@ public class GameLogic extends UniversalAdapter {
 
         } else {
             this.label.setText(
-                    "<html>Winner: black(computer)<br />White stones: " + youNodesCount + "<br>Black stones: "
+                    "<html>Winner: black(AI)<br />White stones: " + youNodesCount + "<br>Black stones: "
                             + aiNodesCount
                             + "</html>");
         }
@@ -150,6 +152,7 @@ public class GameLogic extends UniversalAdapter {
                 this.restartGame();
                 break;
             case KeyEvent.VK_ESCAPE:
+                this.frame.dispose();
                 System.exit(0);
                 break;
         }

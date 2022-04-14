@@ -99,7 +99,11 @@ public class GameLogic extends UniversalAdapter {
     private void printWinner() {
         int youNodesCount = players[0].getNodesCount();
         int aiNodesCount = players[1].getNodesCount();
-        if (youNodesCount > aiNodesCount) {
+        if (youNodesCount == aiNodesCount) {
+            this.label
+                    .setText("<html>Draw<br />White stones: " + youNodesCount + "<br>Black stones: "
+                            + aiNodesCount + "</html>");
+        } else if (youNodesCount > aiNodesCount) {
             this.label
                     .setText("<html>Winner: white(you)<br />White stones: " + youNodesCount + "<br>Black stones: "
                             + aiNodesCount + "</html>");
